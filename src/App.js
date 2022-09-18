@@ -1,24 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  //list of items
+  const fruit = [
+    "apple",
+    "orange",
+    "banana",
+    "mango",
+    "nectarine",
+    "jackfruit",
+    "mandarine orange",
+    "apricot"
+  ];
+
+  const [ search, setSearch ] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const filtered = !search ? fruit : fruit.filter((fruit) => fruit.toLowerCase().includes(search.toLowerCase()));
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <h1>Hello</h1>
+      <div className='search-txt'>Search: {" "}</div>
+        <input type="text" value={search} onChange={handleSearchChange} />
+        {filtered.map((fruit) => {
+          return (
+            <p>{fruit}</p>
+          )
+        })}
+      </div>
+      
+    
   );
 }
 
